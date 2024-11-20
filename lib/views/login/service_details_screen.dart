@@ -2,55 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_car_service_ui/views/Recorder/record_play_audio.dart';
 import 'package:flutter_car_service_ui/views/login/login_page.dart';
 import 'package:gap/gap.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
 
-class Alljobcards extends StatefulWidget {
-  const Alljobcards({super.key});
+class ServiceDetailsScreen extends StatefulWidget {
+  const ServiceDetailsScreen({super.key});
 
   @override
-  _AlljobcardsState createState() => _AlljobcardsState();
+  _ServiceDetailsScreenState createState() => _ServiceDetailsScreenState();
 }
 
-class _AlljobcardsState extends State<Alljobcards> {
+class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
   bool isStartActive = false;
-  bool isEndActive = false;
+  bool isInProgressActive = false;
   bool isDoneActive = false;
-
-  final ImagePicker _picker = ImagePicker();
-  XFile? _image;
-
-  // Future<void> _pickAndCropImage() async {
-  //   // Pick an image
-  //   final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-  //   if (pickedFile != null) {
-  //     // Crop the image
-  //     final croppedFile = await ImageCropper.cropImage(
-  //         sourcePath: pickedFile.path,
-  //         // aspectRatioPresets: [
-  //         //   CropAspectRatioPreset.square,
-  //         //   CropAspectRatioPreset.ratio3x2,
-  //         //   CropAspectRatioPreset.original,
-  //         //   CropAspectRatioPreset.ratio4x3,
-  //         //   CropAspectRatioPreset.ratio16x9
-  //         // ],
-  //         // androidUiSettings: AndroidUiSettings(
-  //         //     toolbarTitle: 'Cropper',
-  //         //     toolbarColor: Colors.deepOrange,
-  //         //     toolbarWidgetColor: Colors.white,
-  //         //     initAspectRatio: CropAspectRatioPreset.original,
-  //         //     lockAspectRatio: false),
-  //         // iosUiSettings: IOSUiSettings(
-  //         //   minimumAspectRatio: 1.0,
-  //         // )
-  //         );
-  //     setState(() {
-  //       if (croppedFile != null) {
-  //         _image = XFile(croppedFile.path);
-  //       }
-  //     });
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +23,7 @@ class _AlljobcardsState extends State<Alljobcards> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        elevation: 0.0,
+        elevation: 2,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           color: Colors.black,
@@ -81,35 +44,30 @@ class _AlljobcardsState extends State<Alljobcards> {
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const SizedBox(
-                  height: 20.0), // Added top margin to avoid app bar overlap
+              const Gap(20),
+              // Image section with title
               Stack(
                 clipBehavior: Clip.none,
                 children: <Widget>[
-                  // The background card for stack effect (slightly bigger)
                   Positioned(
                     top: 15.0,
                     left: 15.0,
                     child: Container(
-                      width: screenWidth * 0.85, // Responsive width
-                      height: screenHeight * 0.55, // Responsive height
+                      width: screenWidth * 0.85,
+                      height: screenHeight * 0.55,
                       decoration: BoxDecoration(
                         color: Colors.grey.shade300,
-                        borderRadius:
-                            BorderRadius.circular(20.0), // Rounded corners
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
                     ),
                   ),
-                  // The main card
                   Container(
-                    width: screenWidth * 0.9, // Responsive width
-                    height: screenHeight * 0.55, // Responsive height
+                    width: screenWidth * 0.9,
+                    height: screenHeight * 0.55,
                     decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.circular(20.0), // Rounded corners
+                      borderRadius: BorderRadius.circular(20.0),
                       image: const DecorationImage(
                         image: NetworkImage(
                           'https://img.freepik.com/free-photo/car-repair-maintenance-theme-mechanic-uniform-working-auto-service_627829-3918.jpg?semt=ais_hybrid',
@@ -132,7 +90,7 @@ class _AlljobcardsState extends State<Alljobcards> {
                         ),
                       ),
                       child: const Text(
-                        'Job Details 1 - Lorem Epusm Lorem Epsum',
+                        'Car Servicing - Job ID: 12345',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20.0,
@@ -150,18 +108,56 @@ class _AlljobcardsState extends State<Alljobcards> {
                   ),
                 ],
               ),
-              const SizedBox(
-                  height: 40.0), // Added space between card and buttons
-              // Row of Outlined Buttons
+              const Gap(30),
 
+              // Job Details Section
+              const Text(
+                "Job Details",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              const Gap(10),
+              const _DetailRow(
+                icon: Icons.calendar_today_outlined,
+                label: "Scheduled Date",
+                value: "Saturday, August 8, 2024",
+              ),
+              const _DetailRow(
+                icon: Icons.access_time,
+                label: "Estimated Time",
+                value: "3 hours",
+              ),
+              const _DetailRow(
+                icon: Icons.car_repair,
+                label: "Service Type",
+                value: "Engine Repair",
+              ),
+              const _DetailRow(
+                icon: Icons.currency_rupee,
+                label: "Estimated Cost",
+                value: "₹2500",
+              ),
+              const Gap(20),
+
+              // Input Section
               const ResumeTextField(
                 title: "Enter Customer Name",
               ),
               const Gap(15),
-              const RecordPlayAudio(),
-
+              const ResumeTextField(
+                title: "Enter Car Model",
+              ),
               const Gap(15),
 
+              // Audio Recording Section
+              const Text(
+                "Record Notes",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const Gap(10),
+              const RecordPlayAudio(),
+              const Gap(20),
+
+              // Service Status Section
               const Text(
                 "Service Status",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -177,10 +173,10 @@ class _AlljobcardsState extends State<Alljobcards> {
                     (value) => setState(() => isStartActive = value),
                   ),
                   _buildSwitchTile(
-                    'Inprogress',
-                    isEndActive,
-                    Colors.orange[800]!,
-                    (value) => setState(() => isEndActive = value),
+                    'In Progress',
+                    isInProgressActive,
+                    Colors.orange,
+                    (value) => setState(() => isInProgressActive = value),
                   ),
                   _buildSwitchTile(
                     'Done',
@@ -192,14 +188,33 @@ class _AlljobcardsState extends State<Alljobcards> {
               ),
 
               const Gap(30),
+
+              // Submit Button
               Center(
-                child: ResumeButton(
-                  onPressed: () {},
-                  buttonText: "Submit",
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Submit action here
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 80, vertical: 15),
+                    backgroundColor: Colors.teal,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                  ),
+                  child: const Text(
+                    "Submit",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
 
-              const Gap(20)
+              const Gap(20),
             ],
           ),
         ),
@@ -232,6 +247,41 @@ class _AlljobcardsState extends State<Alljobcards> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _DetailRow extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String value;
+
+  const _DetailRow({
+    super.key,
+    required this.icon,
+    required this.label,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      child: Row(
+        children: [
+          Icon(icon, color: Colors.teal, size: 20),
+          const SizedBox(width: 10),
+          Text(
+            label,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+          ),
+          const Spacer(),
+          Text(
+            value,
+            style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+          ),
+        ],
+      ),
     );
   }
 }

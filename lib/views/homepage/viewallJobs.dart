@@ -9,62 +9,69 @@ class AllJobsCards extends StatefulWidget {
 }
 
 class _AllJobsCardsState extends State<AllJobsCards> {
-  bool isDarkTheme = false;
-
   final items = [
     CardItem(
       title: 'Current Job Card',
       createdAt: 'Saturday, August 8, 2024',
+      serviceType: 'Engine Repair',
+      status: 'In Progress',
+      cost: '₹250',
       colors: [const Color(0xFF38ef7d), const Color(0xFF11998e)],
     ),
     CardItem(
       title: 'Next Job Card',
       createdAt: 'Monday, October 17, 2024',
+      serviceType: 'Oil Change',
+      status: 'Scheduled',
+      cost: '₹80',
       colors: [const Color(0xFFFC5C7D), const Color(0xFF6A82FB)],
     ),
     CardItem(
       title: 'Drawing Room Design',
       createdAt: 'Saturday, August 8, 2024',
+      serviceType: 'Interior Work',
+      status: 'Completed',
+      cost: '₹1500',
       colors: [const Color(0xFF38ef7d), const Color(0xFF11998e)],
     ),
     CardItem(
       title: 'Bedroom Design',
       createdAt: 'Monday, October 17, 2024',
+      serviceType: 'Furniture Setup',
+      status: 'Pending',
+      cost: '₹500',
       colors: [const Color(0xFFFC5C7D), const Color(0xFF6A82FB)],
     ),
     CardItem(
       title: 'Andromeda Structure',
       createdAt: 'Friday, January 4, 2024',
+      serviceType: '3D Modeling',
+      status: 'In Progress',
+      cost: '₹5000',
       colors: [const Color(0xFFff9966), const Color(0xFFff5e62)],
     ),
     CardItem(
       title: 'Hypercar Design',
       createdAt: 'Sunday, March 28, 2024',
+      serviceType: 'Car Customization',
+      status: 'Completed',
+      cost: '₹20000',
       colors: [const Color(0xFFad5389), const Color(0xFF3c1053)],
-    ),
-    CardItem(
-      title: 'P90 Skin',
-      createdAt: 'Tuesday, February 22, 2024',
-      colors: [const Color(0xFF8360c3), const Color(0xFF2ebf91)],
-    ),
-    CardItem(
-      title: 'Wall Art',
-      createdAt: 'Thursday, November 7, 2024',
-      colors: [const Color(0xFFf953c6), const Color(0xFFb91d73)],
     ),
     CardItem(
       title: 'Spaceship Canvas',
       createdAt: 'Monday, April 11, 2024',
+      serviceType: 'Art Design',
+      status: 'In Progress',
+      cost: '₹1500',
       colors: [const Color(0xFFFFD657), const Color(0xFFFFA453)],
-    ),
-    CardItem(
-      title: 'Desk Design',
-      createdAt: 'Friday, May 31, 2024',
-      colors: [const Color(0xFFeaafc8), const Color(0xFF654ea3)],
     ),
     CardItem(
       title: 'Chair Design',
       createdAt: 'Wednesday, June 24, 2024',
+      serviceType: 'Furniture Customization',
+      status: 'Completed',
+      cost: '₹1200',
       colors: [const Color(0xFF00c6ff), const Color(0xFF0072ff)],
     ),
   ];
@@ -73,39 +80,37 @@ class _AllJobsCardsState extends State<AllJobsCards> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        forceMaterialTransparency: true,
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        elevation: 2,
         centerTitle: true,
         title: const Text(
           'All Jobs Card',
           style: TextStyle(color: Colors.black, fontSize: 18.0),
         ),
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios_new,
-              size: 17,
-            )),
       ),
       body: Center(
         child: SizedBox(
-          width: 360, // Increased the size for a bigger card
+          width: 360, // Card width adjusted for better design
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const SizedBox(height: 20),
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: items.length,
                   itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        CardView(item: items[index]),
-                        const SizedBox(height: 20), // Space between cards
-                      ],
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          CardView(item: items[index]),
+                          const SizedBox(height: 20), // Space between cards
+                        ],
+                      ),
                     );
                   },
                 ),
@@ -114,6 +119,174 @@ class _AllJobsCardsState extends State<AllJobsCards> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class CardView extends StatelessWidget {
+  final CardItem item;
+
+  const CardView({super.key, required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            offset: const Offset(0, 10),
+            blurRadius: 20,
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(15),
+        child: InkWell(
+          onTap: () {
+            // Navigate to details or specific job view
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Card Header with Gradient
+              AspectRatio(
+                aspectRatio: 16 / 9,
+                child: Stack(
+                  children: [
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 700),
+                      curve: Curves.easeInOut,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: item.colors,
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: -140,
+                      left: -200,
+                      child: Text(
+                        item.title.toUpperCase(),
+                        style: const TextStyle(
+                          color: Colors.white12,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.8,
+                          fontSize: 300,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // Card Content
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.title,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      item.createdAt,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall!
+                          .copyWith(color: Colors.grey),
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _buildDetailChip(
+                          context,
+                          label: 'Service',
+                          value: item.serviceType,
+                          color: Colors.teal,
+                        ),
+                        _buildDetailChip(
+                          context,
+                          label: 'Status',
+                          value: item.status,
+                          color: item.status == 'In Progress'
+                              ? Colors.orange
+                              : Colors.green,
+                        ),
+                        _buildDetailChip(
+                          context,
+                          label: 'Cost',
+                          value: item.cost,
+                          color: Colors.blue,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              // View Details Button
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      'View Details',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal[800],
+                      ),
+                    ),
+                    const SizedBox(width: 5),
+                    Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 15,
+                      color: Colors.teal[800]!,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDetailChip(BuildContext context,
+      {required String label, required String value, required Color color}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Colors.grey[600],
+              ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          value,
+          style: Theme.of(context)
+              .textTheme
+              .bodyLarge!
+              .copyWith(color: color, fontWeight: FontWeight.bold),
+        ),
+      ],
     );
   }
 }

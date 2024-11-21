@@ -31,19 +31,19 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   final items = [
     CardItem(
-      title: 'Current Service Card',
+      title: 'Current Job Card',
       createdAt: 'Saturday, August 8, 2024',
       serviceType: 'Engine Repair',
       status: 'In Progress',
-      cost: '₹25000',
+      cost: '₹3000',
       colors: [const Color(0xFF38ef7d), const Color(0xFF11998e)],
     ),
     CardItem(
-      title: 'Next Service Card',
+      title: 'Next Job Card',
       createdAt: 'Monday, October 17, 2024',
       serviceType: 'Oil Change',
       status: 'Scheduled',
-      cost: '₹8200',
+      cost: '₹2500',
       colors: [const Color(0xFFFC5C7D), const Color(0xFF6A82FB)],
     ),
   ];

@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Hyundai',
+      title: 'Service Audio',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         visualDensity: const VisualDensity(vertical: 0),

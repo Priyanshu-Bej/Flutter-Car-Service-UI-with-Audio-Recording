@@ -197,12 +197,12 @@ class CardView extends StatelessWidget {
                               ? Colors.orange
                               : Colors.green,
                         ),
-                        _buildDetailChip(
-                          context,
-                          label: 'Cost',
-                          value: item.cost,
-                          color: Colors.blue,
-                        ),
+                        // _buildDetailChip(
+                        //   context,
+                        //   label: 'Cost',
+                        //   value: item.cost,
+                        //   color: Colors.blue,
+                        // ),
                       ],
                     ),
                   ],

@@ -121,21 +121,21 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                 label: "Scheduled Date",
                 value: "Saturday, August 8, 2024",
               ),
-              const _DetailRow(
-                icon: Icons.access_time,
-                label: "Estimated Time",
-                value: "3 hours",
-              ),
+              // const _DetailRow(
+              //   icon: Icons.access_time,
+              //   label: "Estimated Time",
+              //   value: "3 hours",
+              // ),
               const _DetailRow(
                 icon: Icons.car_repair,
                 label: "Service Type",
                 value: "Engine Repair",
               ),
-              const _DetailRow(
-                icon: Icons.currency_rupee,
-                label: "Estimated Cost",
-                value: "₹2500",
-              ),
+              // const _DetailRow(
+              //   icon: Icons.currency_rupee,
+              //   label: "Estimated Cost",
+              //   value: "₹2500",
+              // ),
               const Gap(20),
 
               // Input Section
